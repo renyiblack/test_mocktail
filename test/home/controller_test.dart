@@ -20,12 +20,12 @@ void main() {
   });
 
   test('getCounter should throw Exception', () {
-    when(() => mock.getInt(any())).thenAnswer((invocation) => throw ('error'));
+    when(() => mock.getInt(any())).thenAnswer((invocation) => throw Exception());
     expect(() => controller.getCounter(), throwsA(isA<Exception>()));
-    verify(() => controller.getCounter()).called(0);
   });
 
   test('getCounter should return 0', () async {
+    when(() => mock.getInt(any())).thenAnswer((invocation) => Future.value(0));
     await controller.getCounter();
     expect(controller.counter, 0);
   });
